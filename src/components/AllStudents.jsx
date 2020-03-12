@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "@reach/router";
 
 export default class AllStudents extends Component {
 	state = { students: [] };
@@ -10,18 +11,24 @@ export default class AllStudents extends Component {
 		const { students } = this.state;
 		return (
 			<table>
-				<th>Name</th>
-				<th>Current Block</th>
-				<th>Starting Cohort</th>
-				{students.map((student) => {
-					return (
-						<tr key={student._id}>
-							<td>{student.name}</td>
-							<td>{student.currentBlock}</td>
-							<td>{student.startingCohort}</td>
-						</tr>
-					);
-				})}
+				<thead>
+					<th>Name</th>
+					<th>Current Block</th>
+					<th>Starting Cohort</th>
+				</thead>
+				<tbody>
+					{students.map((student) => {
+						return (
+							<tr key={student._id}>
+								<td>
+									<Link to={`/Student/${student._id}`}>{student.name}</Link>
+								</td>
+								<td>{student.currentBlock}</td>
+								<td>{student.startingCohort}</td>
+							</tr>
+						);
+					})}
+				</tbody>
 			</table>
 		);
 	};
