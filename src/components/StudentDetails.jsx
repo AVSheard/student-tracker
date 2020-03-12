@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 export default class StudentDetails extends Component {
-	state = { student: [] };
+	state = { student: {} };
 
 	getStudent = (id) => {
 		axios
