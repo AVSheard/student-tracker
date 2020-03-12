@@ -5,17 +5,33 @@ import axios from "axios";
 import { Link } from "@reach/router";
 
 export default class AllStudents extends Component {
-	state = { students: [] };
+	state = { students: [], reverse: 1 };
+
+	sortNames = () => {
+		const { reverse } = this.state;
+		const toSort = [...this.state.students];
+		toSort.sort(function(a, b) {
+			const nameA = a.name.toUpperCase();
+			const nameB = b.name.toUpperCase();
+			if (nameA < nameB) {
+				return -1 * reverse;
+			}
+			if (nameA > nameB) {
+				return 1 * reverse;
+			}
+		});
+		const reverseReverse = reverse * -1;
+		this.setState({ students: toSort, reverse: reverseReverse });
+	};
 
 	generateTable = () => {
 		const { students } = this.state;
 		return (
 			<table>
-				<thead>
-					<th>Name</th>
-					<th>Current Block</th>
-					<th>Starting Cohort</th>
-				</thead>
+				<button onClick={this.sortNames}>Name</button>
+				<th>Current Block</th>
+				<th>Starting Cohort</th>
+
 				<tbody>
 					{students.map((student) => {
 						return (
@@ -37,7 +53,6 @@ export default class AllStudents extends Component {
 		axios
 			.get("https://nc-student-tracker.herokuapp.com/api/students")
 			.then((res) => {
-				console.log(res.data.students);
 				this.setState({ students: res.data.students });
 			});
 	};
