@@ -3,6 +3,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "@reach/router";
+import AddStudent from "./AddStudent";
 
 export default class AllStudents extends Component {
 	state = { students: [], reverse: 1 };
@@ -62,6 +63,11 @@ export default class AllStudents extends Component {
 	}
 
 	render() {
-		return <div>{this.state.students && this.generateTable()}</div>;
+		return (
+			<div>
+				<AddStudent />
+				{this.state.students && this.generateTable()}
+			</div>
+		);
 	}
 }
