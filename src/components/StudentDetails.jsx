@@ -19,14 +19,27 @@ export default class StudentDetails extends Component {
 		this.getStudent(this.props.id);
 	}
 
+	removeStudent = (id) => {
+		axios
+			.delete(`https://nc-student-tracker.herokuapp.com/api/students/${id}`)
+			.then((res) => {});
+	};
+
 	displayStudentInfo = () => {
 		const { name, blockHistory } = this.state.student;
 		return (
 			<>
 				<h2>{name}'s block hisory</h2>
+				<button onClick={() => this.removeStudent(this.props.id)}>
+					Remove Student
+				</button>
 				<table>
-					<th>Block</th>
-					<th>Number</th>
+					<thead>
+						<tr>
+							<th>Block</th>
+							<th>Number</th>
+						</tr>
+					</thead>
 					<tbody>
 						{blockHistory.map((block) => {
 							return (
