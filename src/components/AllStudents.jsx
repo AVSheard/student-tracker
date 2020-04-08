@@ -11,7 +11,7 @@ export default class AllStudents extends Component {
 	sortNames = () => {
 		const { reverse } = this.state;
 		const toSort = [...this.state.students];
-		toSort.sort(function(a, b) {
+		toSort.sort(function (a, b) {
 			const nameA = a.name.toUpperCase();
 			const nameB = b.name.toUpperCase();
 			if (nameA < nameB) {
@@ -29,10 +29,15 @@ export default class AllStudents extends Component {
 		const { students } = this.state;
 		return (
 			<table>
-				<button onClick={this.sortNames}>Name</button>
-				<th>Current Block</th>
-				<th>Starting Cohort</th>
-
+				<thead>
+					<tr>
+						<th>
+							<button onClick={this.sortNames}>Name</button>
+						</th>
+						<th>Current Block</th>
+						<th>Starting Cohort</th>
+					</tr>
+				</thead>
 				<tbody>
 					{students.map((student) => {
 						return (
@@ -62,10 +67,18 @@ export default class AllStudents extends Component {
 		this.getAllStudents();
 	}
 
+	addItem = (item) => {
+		// currentState
+		console.log(item);
+		this.setState(function (curentState) {
+			return { students: [...curentState.students, item.student] };
+		});
+	};
+
 	render() {
 		return (
 			<div>
-				<AddStudent />
+				<AddStudent addItem={this.addItem} />
 				{this.state.students && this.generateTable()}
 			</div>
 		);

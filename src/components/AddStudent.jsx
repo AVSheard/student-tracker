@@ -20,7 +20,7 @@ export default class AddStudent extends Component {
 				startingCohort
 			})
 			.then(({ data }) => {
-				// this.props.addItem(data);
+				this.props.addItem(data);
 			});
 	};
 
