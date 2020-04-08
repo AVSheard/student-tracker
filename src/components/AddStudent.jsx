@@ -13,11 +13,10 @@ export default class AddStudent extends Component {
 	handleSubmit = (res) => {
 		res.preventDefault();
 		const { name, startingCohort } = this.state;
-		console.log({ name, startingCohort });
 		axios
 			.post("https://nc-student-tracker.herokuapp.com/api/students", {
 				name,
-				startingCohort
+				startingCohort,
 			})
 			.then(({ data }) => {
 				this.props.addItem(data);

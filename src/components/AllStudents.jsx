@@ -68,10 +68,8 @@ export default class AllStudents extends Component {
 	}
 
 	addItem = (item) => {
-		// currentState
-		console.log(item);
 		this.setState(function (curentState) {
-			return { students: [...curentState.students, item.student] };
+			return { students: [item.student, ...curentState.students] };
 		});
 	};
 
