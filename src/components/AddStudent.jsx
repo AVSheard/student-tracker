@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 export default class AddStudent extends Component {
-	state = { name: "", startingCohort: 1 };
+	state = { name: "", startingCohort: 0 };
 
 	handleChange = (text, key) => {
 		this.setState({ [key]: text });
@@ -20,6 +20,7 @@ export default class AddStudent extends Component {
 			})
 			.then(({ data }) => {
 				this.props.addItem(data);
+				this.setState({ name: "", startingCohort: 0 });
 			});
 	};
 
@@ -31,6 +32,7 @@ export default class AddStudent extends Component {
 					<input
 						type="text"
 						id="name"
+						value={this.state.name}
 						onChange={(res) => this.handleChange(res.target.value, "name")}
 					/>
 
@@ -38,6 +40,7 @@ export default class AddStudent extends Component {
 					<input
 						type="number"
 						id="startingCohort"
+						value={this.state.startingCohort}
 						onChange={(res) =>
 							this.handleChange(res.target.value, "startingCohort")
 						}
