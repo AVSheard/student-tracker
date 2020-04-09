@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import axios from "axios";
+import { navigate } from "@reach/router";
 
 export default class StudentDetails extends Component {
 	state = { student: {} };
@@ -22,7 +23,9 @@ export default class StudentDetails extends Component {
 	removeStudent = (id) => {
 		axios
 			.delete(`https://nc-student-tracker.herokuapp.com/api/students/${id}`)
-			.then((res) => {});
+			.then((res) => {
+				navigate("../AllStudents");
+			});
 	};
 
 	displayStudentInfo = () => {
